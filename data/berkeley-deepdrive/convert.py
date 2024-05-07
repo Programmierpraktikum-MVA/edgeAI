@@ -55,7 +55,7 @@ def process_dataset(label_type):
                 width = x2 - x1
                 height = y2 - y1
 
-                f.write(f"{class_id} {x_center} {y_center} {width} {height}")
+                f.write(f"{class_id} {x_center} {y_center} {width} {height}\n")
 
 
 if __name__ == "__main__":
