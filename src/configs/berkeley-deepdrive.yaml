@@ -1,0 +1,17 @@
+path: ../../data/berkeley-deepdrive  # dataset root dir
+train: images/train  # train images
+val: images/val  # val images
+test:  images/test # test images (optional)
+
+# Classes
+names:
+  0:  pedestrian
+  1:  rider
+  2:  car
+  3:  truck
+  4:  bus
+  5:  train
+  6:  motorcycle
+  7:  bicycle
+  8:  traffic light
+  9: traffic sign

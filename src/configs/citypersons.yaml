@@ -1,0 +1,12 @@
+path: ../../data/citypersons  # dataset root dir
+train: images/train  # train images
+val: images/val  # val images
+test:  images/test # test images (optional)
+
+# Classes
+names:
+  0:  pedestrian
+  1:  rider
+  2:  sitting person
+  3:  other person
+  4:  group of people

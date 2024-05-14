@@ -1,0 +1,4 @@
+predictions/
+runs/
+*.pt
+*.jpg
