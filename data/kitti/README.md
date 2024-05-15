@@ -3,7 +3,7 @@
 Kitti Dataset object detection dataset with 2d bounding boxes
 
 
-!Note the "kitti-yolo-labels" only has annotations for the train images within "data_object_image2"
+
 
 ## Directory setup
 1. Download the "data_object_image2" subdirectory from the 'kitti dataset' https://www.kaggle.com/datasets/klemenko/kitti-dataset?select=data_object_image_2 
@@ -27,6 +27,7 @@ In the end your directory structure should look like the following
     ├── main.ipynb
     └── README.md
 
+!Note the "kitti-yolo-labels" only has annotations for the train images within "data_object_image2"
 ## Size
 | Dataset | Images | Size | 
 | ------- | ------ | ---- |
