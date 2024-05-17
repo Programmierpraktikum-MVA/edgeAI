@@ -1,0 +1,46 @@
+python3 train.py\
+    --D_netDs projected_d basic\
+    --D_proj_interp 532\
+    --D_proj_network_type dinov2_vitb14\
+    --G_nblocks 9\
+    --G_netG mobile_resnet_attn\
+    --G_ngf 128\
+    --G_padding_type reflect\
+    --alg_cut_nce_idt\
+    --checkpoints_dir /PATH/TO/checkpoints/\
+    --data_crop_size 512\
+    --data_dataset_mode unaligned_labeled_mask_online\
+    --data_load_size 512\
+    --data_online_creation_crop_delta_A 64\
+    --data_online_creation_crop_delta_B 64\
+    --data_online_creation_crop_size_A 512\
+    --data_online_creation_crop_size_B 512\
+    --data_relative_paths\
+    --dataaug_no_rotate\
+    --dataroot /PATH/TO/day2night/\
+    --ddp_port 13458\
+    --f_s_config_segformer models/configs/segformer/segformer_config_b1.json\
+    --f_s_net segformer\
+    --f_s_semantic_nclasses 19\
+    --gpu 0,1\
+    --model_input_nc 3\
+    --model_output_nc 3\
+    --model_type cut\
+    --name bdd100k_day2night_512\
+    --output_display_freq 100\
+    --output_print_freq 100\
+    --train_D_lr 0.0001\
+    --train_G_ema\
+    --train_G_lr 0.0002\
+    --train_batch_size 1\
+    --train_iter_size 8\
+    --train_mask_f_s_B\
+    --train_n_epochs 800\
+    --train_optim adamw\
+    --train_sem_idt\
+    --train_sem_mask_lambda 10.0\
+    --train_sem_use_label_B\
+    --train_semantic_mask\
+    --with_amp\
+    --with_tf32\
+    --with_torch_compile
