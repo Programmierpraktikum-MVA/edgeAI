@@ -1,6 +1,6 @@
 # Kitti Dataset Object Detection 2D
 
-Kitti Dataset object detection dataset with 2d bounding boxes
+Kitti object detection dataset with 2d bounding boxes
 
 
 
