@@ -17,6 +17,7 @@ Affterwards the directory structure should look like this
 
 More info/reference here: https://www.kaggle.com/datasets/andrewmvd/road-sign-detections
 
+
 **Data structure:** 
 Each .png image has a corresponding .xml file (road0.png has road0.xml)
 Each "object' within the xml file corresponds to a bbox : 
