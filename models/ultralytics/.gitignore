@@ -3,3 +3,4 @@ runs/
 wandb/
 *.pt
 *.jpg
+*.mp4
