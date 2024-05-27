@@ -18,6 +18,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train a YOLO model on a given dataset.")
     parser.add_argument("data_path", help="Path to the configuration YAML file.")
     parser.add_argument("-e", "--epochs", type=int, default=1, help="Number of epochs to train the model for (default is 1).")
-    parser.add_argument("--wandb", action="store_true", help="Flag to enable tracking with wandb")
+    parser.add_argument("--wandb", help="Flag to enable tracking with wandb")
     args = parser.parse_args()
     main(args.data_path, args.epochs, args.wandb)
