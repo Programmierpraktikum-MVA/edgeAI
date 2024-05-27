@@ -1,4 +1,4 @@
-path: ../../data/berkeley-deepdrive  # dataset root dir
+path: deepdrive  # dataset root dir
 train: images/train  # train images
 val: images/val  # val images
 test:  images/test # test images (optional)

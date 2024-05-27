@@ -1,9 +1,11 @@
+# This works but it's ugly
+
 import os
 import random
 from ultralytics import YOLO
 
 num_predictions = 5
-model = "roadsigns"
+model = "deepdrive"
 run_number = ""
 
 model_path = f"runs/detect/train{run_number}/weights/best.pt"

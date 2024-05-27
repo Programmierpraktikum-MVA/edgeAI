@@ -1,4 +1,4 @@
-path: ../../data/citypersons  # dataset root dir
+path: citypersons  # dataset root dir
 train: images/train  # train images
 val: images/val  # val images
 test:  images/test # test images (optional)
