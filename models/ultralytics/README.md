@@ -44,3 +44,11 @@ For YOLOv10 there are a couple more steps:
 ## Predict
 
 There is a working `predict.py` script but it's pretty ugly and not well written.
+
+## Stream
+
+This sets up a simple flask server that streams images to a port. I guess there are much better ways to do this but this is very simple and works.
+
+If you want top use your **webcam** as input, simply change the `cv.VideoCapture` input to 0. Otherwise, get the [sample video](https://raw.githubusercontent.com/intel-iot-devkit/sample-videos/master/person-bicycle-car-detection.mp4), used in the `stream.py` file or use any other video file you want.
+
+Then simply run the python file and check the port which the server is running on.
