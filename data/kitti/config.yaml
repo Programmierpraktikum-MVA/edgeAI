@@ -1,0 +1,13 @@
+path: kitti
+train: images/train
+val: images/val
+
+names:
+  0:  car
+  1:  pedestrian
+  2:  van
+  3:  cyclist
+  4:  truck
+  5:  misc
+  6:  tram
+  7:  person
