@@ -25,6 +25,16 @@ This should yield all of the devices in your network, then simply connect to it 
 ssh <user>@<ip_address>
 ```
 
+## Download weights
+
+I have created a GitHub Repository with weights in different formats of the best YOLOv8 and YOLOv10 training runs. Simply clone the repostiory and move the weights to the directory you need them.
+
+```sh
+git clone https://github.com/squarra/yolo-weights.git
+```
+
+Alternatively you can also send your files over the network.
+
 ## Sending files to the Raspberry Pi over the network
 
 Example to send a .pt file over the network.
