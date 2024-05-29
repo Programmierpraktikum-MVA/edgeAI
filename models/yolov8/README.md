@@ -25,6 +25,8 @@ Go to the ultralytics config directory (linux default is /home/<user>/.config/Ul
 file. Change the `datasets_dir` to point to the `data` directory in the root of this project (
 e.g. `/home/<user>/edgeAI/data`).
 
+**Other import note:** When running the `train.py` script for the first time, ultralytics will download the [ncnn](https://github.com/Tencent/ncnn) dependency. This takes a very long time (about 15mins average). Ncnn is used to convert the weights into a format which has better performance on edge devices. If you don't plan to run the model on edge devices, you can remove the `model.export(format="ncnn")` line from the script.
+
 ## Inference
 
 The `app.py` script sets up a simple flask server that streams images to a port. I guess there are much better ways to
