@@ -142,3 +142,8 @@ cython_debug/
 
 # VSCode
 .vscode/
+
+# ultralytics
+runs/
+*.mp4
+*.pt
