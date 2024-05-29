@@ -4,7 +4,7 @@ from ultralytics import YOLO
 
 app = Flask(__name__)
 
-model = YOLO("runs/detect/train7/weights/best.pt")
+model = YOLO("runs/detect/train7/weights/best.pt", task="detect")
 
 video_path = "person-bicycle-car-detection.mp4"
 cap = cv2.VideoCapture(video_path)

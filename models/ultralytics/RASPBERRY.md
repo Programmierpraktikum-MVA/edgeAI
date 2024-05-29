@@ -41,11 +41,15 @@ scp -r runs/detect/train7/weights/best_ncnn_model/ pierre@raspberrypi:/home/<use
 
 ## Benchmarks
 
-| model   | format | speed  |
-| ------- | ------ | ------ |
-| Yolov8  | normal | 1100ms |
-| Yolov8  | ncnn   | 375ms  |
-| Yolov10 | normal | 800ms  |
-| Yolov10 | ncnn   | error  |
+| model   | format   | speed  |
+| ------- | -------- | ------ |
+| Yolov8  | ncnn     | 375ms  |
+| YOLOv8  | openvino | 550ms  |
+| YOLOv8  | onnx     | 575ms  |
+| Yolov10 | onnx     | 600ms  |
+| Yolov10 | normal   | 800ms  |
+| Yolov8  | normal   | 1100ms |
+| Yolov10 | ncnn     | error  |
+| YOLOv10 | openvino | error  |
 
 Unfortunately some layer used in the YOLOv10 archticture ins't implemented in the ncnn library. At least that's my guess. If we could get YOLOv10 to run with ncnn we would probably get a really nice performance boost.
