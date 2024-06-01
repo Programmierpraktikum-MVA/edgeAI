@@ -5,6 +5,7 @@
 ## Labels Used
 
 Unified Kitti/Deepdrive labels:
+
 0. Car
 1. Pedestrian
 2. Van
@@ -22,12 +23,6 @@ Unified Kitti/Deepdrive labels:
 14. stop sign
 15. speedlimit sign
 16. crosswalk
-
-roadsigns:
-1. trafficlight
-2. sto
-3. speedlimit
-4. crosswalk
 ---
 
 
