@@ -145,5 +145,7 @@ cython_debug/
 
 # ultralytics
 runs/
+labels.cache
+*.jpg
 *.mp4
 *.pt
