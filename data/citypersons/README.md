@@ -1,14 +1,15 @@
 # Citypersons Dataset
 
-Download the `leftImg8bit_trainvaltest.zip` file from https://www.cityscapes-dataset.com/downloads/ and extract the images to this directory. After extracting, the directory structure should look like this:
+Download the `leftImg8bit_trainvaltest.zip` file from https://www.cityscapes-dataset.com/downloads/ and extract the images to this directory. Also download the `anno_train.mat` and `anno_val.mat` files from https://github.com/CharlesShang/Detectron-PYTORCH/tree/master/data/citypersons/annotations. After downloading and extracting, the directory structure should look like this:
 
     .
     ├── annotations
-    ├── leftImg8bit_trainvaltest
-        ├── leftImg8bit
-            ├── test
-            ├── train
-            ├── val
+        ├── anno_train.mat
+        └── anno_val.mat
+    ├── images
+        ├── test
+        ├── train
+        └── val
     ├── main.ipynb
     └── README.md
 
