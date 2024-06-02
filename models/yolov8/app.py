@@ -1,6 +1,6 @@
 import argparse
 
-# Parser zum Einlesen der Kommandozeile initialisieren
+# Initialize parser for reading the command line
 parser = argparse.ArgumentParser(description='Start the Flask app with a YOLO model and video input.')
 parser.add_argument('model_path', type=str, help='Path to the YOLO model file')
 parser.add_argument('video_path', type=str, help='Path to the video file')
@@ -17,8 +17,8 @@ cap = cv2.VideoCapture(args.video_path)
 
 def generate_frames():
     """
-    Diese Funktion liest Frames aus dem Video, verarbeitet sie mit dem YOLO-Modell
-    und generiert die annotierten Frames für die Videoausgabe.
+    This function reads frames from the video, processes them with the YOLO model
+    and generates the annotated frames for the video output.
     """
     while cap.isOpened():
         success, frame = cap.read()
