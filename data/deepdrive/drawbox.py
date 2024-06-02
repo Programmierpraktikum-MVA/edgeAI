@@ -23,6 +23,7 @@ head, descriptionfile = os.path.split(path)
 descriptionfile = descriptionfile[:-4] + ".txt"
 txtpath = "labels" + head[6:] + f"/{descriptionfile}"
 
+# read txt-file line by line to draw the boxes
 with open(txtpath) as f:
     for line in f:
         label, x_center, y_center, width, height = line.split(" ")
@@ -37,8 +38,8 @@ with open(txtpath) as f:
         print(x1,x2,y1,y2)
         cv2.rectangle(image, (x1,y1),(x2,y2), (0,255,0),1)
         cv2.putText(image, label, (x1, y1 - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,255,0), 2)
-        print(label, x_center, y_center, width, height) 
-cv2.imshow(f"{path}", image)
 
+
+cv2.imshow(f"{path}", image)
 cv2.waitKey(0)
 
