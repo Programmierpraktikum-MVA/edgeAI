@@ -13,6 +13,7 @@ Affterwards the directory structure should look like this
     └── README.md
 
 
+
 ## Annotations
 
 More info/reference here: https://www.kaggle.com/datasets/andrewmvd/road-sign-detections
@@ -52,5 +53,32 @@ Example road0.xml
 2. Stop (name = stop)
 3. Speedlimit (name = speedlimit)
 4. Crosswalk (name = crosswalk)
+
+## Convert to Yolo-Format
+
+Run convert.py, it will shuffle the images and annotations into train and val folders, and afterwards create label files
+in yolo format.
+
+The Structure in the End should look like
+
+    .
+    ├── annotations/
+    │   └── train
+    │       └── roadX.txt
+    │   └── val
+    │       └── roadY.txt
+    ├── images/
+    │   └── train
+    │       └── roadX.png
+    │   └── val
+    │       └── roadY.png
+    ├── labels/
+    │   └── train
+    │       └── roadX.txt
+    │   └── val
+    │       └── roadY.txt
+    ├── .gitignore
+    ├── main.ipynb
+    └── README.md
 
 

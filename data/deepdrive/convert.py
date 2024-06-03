@@ -13,6 +13,7 @@ class_dict = {
     "bicycle": 11,
     "traffic light": 12,
     "traffic sign": 13,
+
 }
 
 image_width = 1280
