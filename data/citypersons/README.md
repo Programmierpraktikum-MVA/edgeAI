@@ -90,15 +90,11 @@ in each line we have 1 bbox with the following syntax
 }
 
 
-
 **class label definition:**
-#TODO 
-do we want to keep the ignore region class?
+3 Distinct Labels
 
-0. ignore regions (fake humans, e.g. people on posters, reflections etc.)
-1. pedestrians
-2. riders
-3. sitting persons
-4. other persons with unusual postures
-5. group of people
+pedestrian 1,\
+rider 3, \
+sitting person 7 
+
 
