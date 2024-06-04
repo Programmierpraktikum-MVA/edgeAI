@@ -4,11 +4,18 @@ import scipy.io
 import shutil
 from tqdm import tqdm
 
+#unify class_ids with other datasets
+unified_classes = {
+    1: 1,  # Pedestrian remains 1
+    2: 3,  # Rider becomes 3
+    3: 7   # Sitting person becomes 7
+}
 
 """
 Script to set up the right image directory structure and generate Yolo Labels for training
-
 """
+
+
 
 #convert annotations to YOLO format and returns the array of annotations
 def convert_to_yolo(annotations, image_width, image_height):
@@ -28,12 +35,16 @@ def convert_to_yolo(annotations, image_width, image_height):
         normalized_h = h / image_height
         
 
-        #TODO Uncomment the following code snippet, if we do not use class 0 - ignore regions
-        #add this if we want to use the ignore-label
-        # if class_label == 0:
-        #     continue
 
-        class_id = int(class_label) 
+
+
+        class_label = int(class_label) 
+        # map classes to unified classes
+        class_id = unified_classes.get(class_label)
+        if class_id is None:
+            continue  # Skip this bbox if class ID is not mapped
+
+
         # Append annotation in YOLO format: class_id x_center y_center normalized_w normalized_h
         yolo_annotations.append(f"{class_id} {x_center} {y_center} {normalized_w} {normalized_h}")
     return yolo_annotations
@@ -85,7 +96,14 @@ def process_dataset(anno_file, image_folder, label_folder):
 
 
 def move_images(src_dir, dest_dir):
- 
+    """
+    Moves images from the source directory to the destination directory.
+
+    Args:
+        src_dir (str): Path to the source directory.
+        dest_dir (str): Path to the destination directory.
+    """
+
     # Ensure the destination directory exists
     if not os.path.exists(dest_dir):
         os.makedirs(dest_dir)
