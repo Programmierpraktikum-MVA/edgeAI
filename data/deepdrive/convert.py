@@ -3,16 +3,17 @@ import os
 from tqdm import tqdm
 
 class_dict = {
-    "pedestrian": 0,
-    "rider": 1,
-    "car": 2,
-    "truck": 3,
-    "bus": 4,
-    "train": 5,
-    "motorcycle": 6,
-    "bicycle": 7,
-    "traffic light": 8,
-    "traffic sign": 9,
+    "car": 0,
+    "pedestrian": 1,
+    "rider": 3,
+    "truck": 4,
+    "bus": 8,
+    "train": 9,
+    "motorcycle": 10,
+    "bicycle": 11,
+    "traffic light": 12,
+    "traffic sign": 13,
+
 }
 
 image_width = 1280
