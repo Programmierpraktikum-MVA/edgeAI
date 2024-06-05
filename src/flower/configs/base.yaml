@@ -1,0 +1,5 @@
+path: "../../data/roadsigns/data.yaml"
+num_examples: 789
+num_clients: 2
+device: mps
+epochs: 10
