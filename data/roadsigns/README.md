@@ -1,7 +1,7 @@
 # Roadsign Dataset
 
 Download the 'archive.zip' file from https://www.kaggle.com/datasets/andrewmvd/road-sign-detection and extract the folder into this directiory.
-Affterwards the directory structure should look like this
+Afterward the directory structure should look like this
     
     .
     ├── annotations/
@@ -21,7 +21,7 @@ More info/reference here: https://www.kaggle.com/datasets/andrewmvd/road-sign-de
 
 **Data structure:** 
 Each .png image has a corresponding .xml file (road0.png has road0.xml)
-Each "object' within the xml file corresponds to a bbox : 
+Each "object" within the xml file corresponds to a bbox : 
 
 
 
@@ -49,14 +49,14 @@ Example road0.xml
 
 **4 classes for objects:**
 
-1. Trafic Light (name = trafficlight)
+1. Traffic Light (name = trafficlight)
 2. Stop (name = stop)
 3. Speedlimit (name = speedlimit)
 4. Crosswalk (name = crosswalk)
 
 ## Convert to Yolo-Format
 
-Run convert.py, it will shuffle the images and annotations into train and val folders, and afterwards create label files
+Run convert.py , the Structure before using convert.py should be equal to the one mentioned in Roadsigns Dataset , it will shuffle the images and annotations into train and val folders, and afterwards create label files
 in yolo format.
 
 The Structure in the End should look like
