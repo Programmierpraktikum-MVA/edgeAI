@@ -3,32 +3,30 @@
 Download the 'archive.zip' file from https://www.kaggle.com/datasets/andrewmvd/road-sign-detection and extract the folder into this directiory.
 Afterward the directory structure should look like this
     
-    .
-    ├── annotations/
-    │   └── road0.xml
-    ├── images/
-    │   └── road0.png
-    ├── .gitignore
-    ├── main.ipynb
-    └── README.md
-
-
+```
+roadsigns
+├── annotations/
+│   └── road0.xml
+├── images/
+│   └── road0.png
+├── config.yaml
+├── convert.py
+├── main.ipynb
+└── README.md
+```
 
 ## Annotations
 
 More info/reference here: https://www.kaggle.com/datasets/andrewmvd/road-sign-detections
 
-
 **Data structure:** 
 Each .png image has a corresponding .xml file (road0.png has road0.xml)
 Each "object" within the xml file corresponds to a bbox : 
 
-
-
 **Bounding Box Annotation Format:**
 Example road0.xml
 
-```
+```xml
 <object>
     <name>trafficlight</name>
     <pose>Unspecified</pose>
@@ -43,9 +41,9 @@ Example road0.xml
     </bndbox>
 </object>
 ```
+
 **More info for BBoxes:**
 - (xmin,ymin) is the upper left corner
-
 
 **4 classes for objects:**
 
@@ -61,24 +59,25 @@ in yolo format.
 
 The Structure in the End should look like
 
-    .
-    ├── annotations/
-    │   └── train
-    │       └── roadX.txt
-    │   └── val
-    │       └── roadY.txt
-    ├── images/
-    │   └── train
-    │       └── roadX.png
-    │   └── val
-    │       └── roadY.png
-    ├── labels/
-    │   └── train
-    │       └── roadX.txt
-    │   └── val
-    │       └── roadY.txt
-    ├── .gitignore
-    ├── main.ipynb
-    └── README.md
-
-
+```
+roadsigns
+├── annotations/
+│   ├── train
+│   │   └── roadX.xml
+│   └── val
+│       └── roadY.xml
+├── images/
+│   ├── train
+│   │   └── roadX.png
+│   └── val
+│       └── roadY.png
+├── labels/
+│   ├── train
+│   │   └── roadX.txt
+│   └── val
+│       └── roadY.txt
+├── config.yaml
+├── convert.py
+├── main.ipynb
+└── README.md
+```

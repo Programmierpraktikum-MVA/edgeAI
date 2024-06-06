@@ -9,9 +9,17 @@ class_dict = {
     "speedlimit": 15,
     "crosswalk": 16,
 }
-def randomly_assign_files(src_dir_img, src_dir_anno, dest_dir_train, dest_dir_val, train_ratio=0.8):
+
+src_dir_img = 'images'
+src_dir_anno = 'annotations'
+dest_dir_train = 'train'
+dest_dir_val = 'val'
+
+def randomly_assign_files(train_ratio=0.8):
     image_files = [f for f in os.listdir(src_dir_img) if f.endswith('.png')]
     annotation_files = [f for f in os.listdir(src_dir_anno) if f.endswith('.xml')]
+    image_files.sort()
+    annotation_files.sort()
     os.makedirs(src_dir_img + '/' + dest_dir_train, exist_ok=True)
     os.makedirs(src_dir_img + '/' + dest_dir_val, exist_ok=True)
     os.makedirs(src_dir_anno + '/' + dest_dir_train, exist_ok=True)
@@ -64,9 +72,4 @@ def convert_xml_to_yolo(cur_xml_file, filename):
 
 
 if __name__ == "__main__":
-    src_dir_img = 'images'
-    src_dir_anno = 'annotations'
-    dest_dir_train = 'train'
-    dest_dir_val = 'val'
-
-    randomly_assign_files(src_dir_img, src_dir_anno, dest_dir_train, dest_dir_val)
+    randomly_assign_files()
