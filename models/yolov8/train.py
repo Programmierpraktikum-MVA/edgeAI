@@ -1,12 +1,17 @@
 import argparse
-
-parser = argparse.ArgumentParser(description="Train a YOLOv8 model on a given dataset.")
-parser.add_argument("data_path", help="Path to the configuration YAML file.")
-parser.add_argument("-e", "--epochs", type=int, default=1, help="Number of epochs to train the model for (default is 1).")
-args = parser.parse_args()
+from multiprocessing import freeze_support
 
 from ultralytics import YOLO
-model = YOLO("yolov8n.pt")
-model.train(data=args.data_path, epochs=args.epochs)
-model.export(format="onnx")
-model.export(format="ncnn")
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('data_path', type=str, help='Path to the data configuration file')
+    parser.add_argument('--epochs', type=int, default=1, help='Number of epochs to train')
+    args = parser.parse_args()
+
+    model = YOLO('yolov8n.pt')
+    model.train(data=args.data_path, epochs=args.epochs)
+
+if __name__ == '__main__':
+    freeze_support()
+    main()

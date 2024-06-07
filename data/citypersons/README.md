@@ -1,10 +1,13 @@
 # Citypersons Dataset
+
 ## Download and Setup of Datasets
 
-Download the `leftImg8bit_trainvaltest.zip` file from https://www.cityscapes-dataset.com/downloads/ and extract the images to this directory.
-Also download the `anno_train.mat` and `anno_val.mat` files from https://github.com/CharlesShang/Detectron-PYTORCH/tree/master/data/citypersons/annotations.
+Download the `leftImg8bit_trainvaltest.zip` file from https://www.cityscapes-dataset.com/downloads/ and extract the
+images to this directory.
+Also download the `anno_train.mat` and `anno_val.mat` files
+from https://github.com/CharlesShang/Detectron-PYTORCH/tree/master/data/citypersons/annotations.
 
- After extracting, the directory structure NEEDS to look like this, before we can proceed.
+After extracting, the directory structure NEEDS to look like this, before we can proceed.
 
     .
     ├── annotations
@@ -20,13 +23,11 @@ Also download the `anno_train.mat` and `anno_val.mat` files from https://github.
     └── setup.py
 
 Now follow the following steps to restructure the folder and create yolo labels for the images
-1. Generate the labels by running  `convert.py`, this will create a new labels folder to store the annotations in YOLO Format.
-The subdirectories for each city are removed so for example the label for `leftImg8Bit/train/aachen/aachen.xxxx.png` will be stored under `labels/train/aaechen.xxx.png`!
 
-2. Run `setup.py` to move all images into a centralized `images ` folder, without subdirectories for each city
+1. Run `setup.py` to move all images into a centralized `images ` folder, without subdirectories for each city the
+   labels are also created
 
-Feel free to delete the `annotations` and (empty )`leftImg8bit` folder 
-
+Feel free to delete the `annotations` and (empty )`leftImg8bit` folder
 
 If all went well the new folder structure should look like this
 
@@ -50,9 +51,8 @@ If all went well the new folder structure should look like this
     ├── README.md
     └── setup.py
 
-
-
 ## Old Annotations (not in Yolo format)
+
 The original .mat annotations have the following format
 More info here: https://github.com/CharlesShang/Detectron-PYTORCH/tree/master/data/citypersons/annotations
 
@@ -78,17 +78,15 @@ More info here: https://github.com/CharlesShang/Detectron-PYTORCH/tree/master/da
 - else
   [x1,y1,w,h] = [x1_vis, y1_vis, w_vis, h_vis];
 
-
-
 ## New Annotations (yolo format)
+
 A corresponding txt file for each image
 
 **yolo format**
-in each line we have 1 bbox with the following syntax 
+in each line we have 1 bbox with the following syntax
 
- {class_id} {x_center} {y_center} {normalized_width} {normalized_height
+{class_id} {x_center} {y_center} {normalized_width} {normalized_height
 }
-
 
 **class label definition:**
 3 Distinct Labels
