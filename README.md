@@ -5,13 +5,17 @@
 If you are a Windows user and want to try out our project, follow the steps outlined to ensure it
 runs smoothly without errors.
 
+**YouTube Tutorial:** Watch this
+helpful [YouTube video](https://www.youtube.com/watch?v=r7Am-ZGMef8&ab_channel=SL7Tech) which provides a detailed
+guide.
+
+**Text Guide:** Another helpful source
+in [Text](https://medium.com/analytics-vidhya/installing-cuda-and-cudnn-on-windows-d44b8e9876b5) form.
+
+
 ## 1. Download Required Software
 
 Before getting started, ensure you have the necessary software installed:
-
-- **YouTube Tutorial:** Watch this
-  helpful [YouTube video](https://www.youtube.com/watch?v=r7Am-ZGMef8&ab_channel=SL7Tech) which provides a detailed
-  guide.
 
 - **PyTorch:** Visit the [PyTorch website](https://pytorch.org/get-started/locally/) to get the correct version number
   of CUDA and a pip install command.
