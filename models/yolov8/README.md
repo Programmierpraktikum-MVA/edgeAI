@@ -6,18 +6,24 @@
 
 If you want to finetune a YOLOv8 model or earlier YOLO models, simply use the `train.py` script and change the
 line `model = YOLO("yolov8n.pt")` into the pretrained model weights that you actually want. This can either be a local
-file or one that ultralytics [features by default](https://docs.ultralytics.com/models/). Run the `train.py` script
-providing a configuration file for the dataset you want to train on.
+file or one that ultralytics [features by default](https://docs.ultralytics.com/models/). If you want to use one of our
+data sets, follow the instructions in the README.md of the respective data set. In these files you will find everything
+important such as the folder structure and the conversion of the annotations. The conversion is important because it
+converts the annotations into labels that the Yolo model can use, so if you want to use your own data set, make sure
+that
+the labels are in the correct format. Run the `train.py` script providing a configuration file for the dataset you want
+to train on. Example:
 
 ```sh
-python3 train.py ../../data/kitti/config.yaml
+python3 train.py ../../data/roadsigns/config.yaml
 ```
 
 You can also specify the number of epochs to train for by passing it as an argument to the `--epochs` or `-e` flag (
-default is 1).
+default is 1). Simply put, the more epochs the training goes through, the better the model gets at interpreting the
+data.
 
 ```sh
-python3 train.py -e 3 ../../data/kitti/config.yaml
+python3 train.py -e 3 ../../data/roadsigns/config.yaml
 ```
 
 **Important note:** When running the script for the first time, ultralytics will complain about a missing dataset path.
@@ -25,7 +31,13 @@ Go to the ultralytics config directory (linux default is /home/<user>/.config/Ul
 file. Change the `datasets_dir` to point to the `data` directory in the root of this project (
 e.g. `/home/<user>/edgeAI/data`).
 
-**Other import note:** When running the `train.py` script for the first time, ultralytics will download the [ncnn](https://github.com/Tencent/ncnn) dependency. This takes a very long time (about 15mins average). Ncnn is used to convert the weights into a format which has better performance on edge devices. If you don't plan to run the model on edge devices, you can remove the `model.export(format="ncnn")` line from the script.
+**Other import note:** When running the `train.py` script for the first time, ultralytics will download
+the [ncnn](https://github.com/Tencent/ncnn) dependency. This takes a very long time (about 15mins average). Ncnn is used
+to convert the weights into a format which has better performance on edge devices. If you don't plan to run the model on
+edge devices, you can remove the `model.export(format="ncnn")` line from the script.
+
+**Other import note:** If you want to run the train.py via Windows you have to specify in the config.yaml and the paths
+Example: path: ..\roadsigns -> C:\Users\%user%\Documents\GitHub\edgeAI\data\roadsigns
 
 ## Inference
 

@@ -2,39 +2,61 @@
 
 **[YOLOv10 Repository](https://github.com/THU-MIG/yolov10.git)**
 
-YOLOv10 just recently came out and is not officially supported by the ultralytics library yet. The authors provide a custom implementation so you can use YOLOv10 in the usual ultralytics way. Simply pip install the library from source and you are good to go.
+YOLOv10 just recently came out and is not officially supported by the ultralytics library yet. The authors provide a
+custom implementation, so you can use YOLOv10 in the usual ultralytics way. Simply pip install the library from source
+and you are good to go.
 
 ```sh
 pip install git+https://github.com/THU-MIG/yolov10.git
 ```
 
-The authors also provide a pretrained YOLOv10n model. You can download it from [here](https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10n.pt)
+The authors also provide a pretrained YOLOv10n model. You can download it
+from [here](https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10n.pt)
 
 ## Training
 
-Run the `train.py` script providing a configuration file for the dataset you want to train on.
+If you want to use one of our data sets, follow the instructions in the README.md of the respective data set. In these
+files you will find everything important such as the folder structure and the conversion of the annotations. The
+conversion is important because it converts the annotations into labels that the YOLOv10 model can use, so if you want
+to use your own data set, make sure that the labels are in the correct format. Run the `train.py` script providing a
+configuration file for the dataset you want to train on.
 
 ```sh
-python3 train.py ../../data/deepdrive/config.yaml
+python train.py ../../data/roadsigns/config.yaml
 ```
 
-You can also specify the number of epochs to train for by passing it as an argument to the `--epochs` or `-e` flag (default is 1).
+You can also specify the number of epochs to train for by passing it as an argument to the `--epochs` or `-e` flag (
+default is 1).
 
 ```sh
 python3 train.py -e 3 ../../data/deepdrive/config.yaml
 ```
 
-**Important note:** When running the script for the first time, ultralytics will complain about a missing dataset path. Go to the ultralytics config directory (linux default is /home/<user>/.config/Ultralytics) and open the `settings.yaml` file. Change the `datasets_dir` to point to the `data` directory in the root of this project (e.g. `/home/<user>/edgeAI/data`).
+**Important note:** When running the script for the first time, ultralytics will complain about a missing dataset path.
+Go to the ultralytics config directory (linux default is /home/<user>/.config/Ultralytics) and open the `settings.yaml`
+file. Change the `datasets_dir` to point to the `data` directory in the root of this project (
+e.g. `/home/<user>/edgeAI/data`).
+
+**Other import note:** When running the `train.py` script for the first time, ultralytics will download
+the [ncnn](https://github.com/Tencent/ncnn) dependency. This takes a very long time (about 15mins average). Ncnn is used
+to convert the weights into a format which has better performance on edge devices. If you don't plan to run the model on
+edge devices, you can remove the `model.export(format="ncnn")` line from the script.
+
+**Other import note:** If you want to run the train.py via Windows you have to specify in the config.yaml and the paths
+Example: path: ..\roadsigns -> C:\Users\%user%\Documents\GitHub\edgeAI\data\roadsigns
 
 ## Inference
 
-The `app.py` script sets up a simple flask server that streams images to a port. I guess there are much better ways to do this but this is very simple and works. Provide a path to the model you want to use and the video source, usually a video file. The example video used here can be downloaded from [here](https://raw.githubusercontent.com/intel-iot-devkit/sample-videos/master/person-bicycle-car-detection.mp4)
+The `app.py` script sets up a simple flask server that streams images to a port. I guess there are much better ways to
+do this but this is very simple and works. Provide a path to the model you want to use and the video source, usually a
+video file. The example video used here can be downloaded
+from [here](https://raw.githubusercontent.com/intel-iot-devkit/sample-videos/master/person-bicycle-car-detection.mp4)
 
 ```sh
 python3 app.py runs/detect/train/weights/best.pt person-bicycle-car-detection.mp4
 ```
 
-If you want want to use your **webcam** as input, simply pass `0` as video source.
+If you want to use your **webcam** as input, simply pass `0` as video source.
 
 ```sh
 python3 app.py runs/detect/train/weights/best.pt 0
