@@ -1,4 +1,6 @@
 import argparse
+import os
+import sys
 
 # Initialize parser for reading the command line
 parser = argparse.ArgumentParser(description='Start the Flask app with a YOLO model and video input.')
@@ -12,7 +14,32 @@ from ultralytics import YOLOv10
 
 app = Flask(__name__)
 model = YOLOv10(args.model_path, task="detect")
-cap = cv2.VideoCapture(args.video_path)
+#cap = cv2.VideoCapture(args.video_path)
+
+try:
+    # Check if video_path is an integer (for webcam) or a file path
+    if args.video_path.isdigit():
+        video_path = int(args.video_path)
+        cap = cv2.VideoCapture(video_path)
+        if not cap.isOpened():
+            raise ValueError(f"Cannot open the webcam with id {video_path}.")
+    else:
+        # Check if the file exists
+        if not os.path.exists(args.video_path):
+            raise FileNotFoundError(f"Video file {args.video_path} does not exist.")
+
+        # Check if the file extension is .mp4
+        if not args.video_path.lower().endswith('.mp4'):
+            raise ValueError(f"Video file {args.video_path} is not an .mp4 file.")
+
+        cap = cv2.VideoCapture(args.video_path)
+        if not cap.isOpened():
+            raise ValueError(f"Cannot open the video file {args.video_path}.")
+
+    print("Video source opened successfully.")
+except Exception as e:
+    print(f"Error: {e}")
+    sys.exit(1)
 
 
 def generate_frames():
@@ -21,6 +48,7 @@ def generate_frames():
     and generates the annotated frames for the video output.
     """
     while cap.isOpened():
+
         success, frame = cap.read()
 
         if not success:
