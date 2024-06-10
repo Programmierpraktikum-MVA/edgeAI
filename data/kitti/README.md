@@ -9,22 +9,30 @@ Kitti object detection dataset with 2d bounding boxes
 1. Download the "data_object_image2" subdirectory from the 'kitti dataset' https://www.kaggle.com/datasets/klemenko/kitti-dataset?select=data_object_image_2 
 !The download should only be 11+Gb, we do not need to download the entire dataset (24GB)
 2. Download 'kitti-yolo-labels' from https://www.kaggle.com/datasets/shreydan/kitti-dataset-yolo-format 
-3. Extract the folders "data_object_image2/training/image_2" and "kitti-yolo-labels/labels" into this directiory
-4. Rename the folder "data_object_image2/training/image_2" to "images" 
-5. Rename the "kitti-yolo-labels/labels" folder to "annotations"
-6. 
+3. Extract the folders `data_object_image2/training/image_2` and `kitti-yolo-labels/labels` into this directiory
+4. Rename the folder `data_object_image2/training/image_2` to `images`
+5. Rename the `kitti-yolo-labels/labels` folder to `annotations`
+6. Run convert.py to generate the train/val/test split (70%/15%/15%)
+7. Feel free to delete the empty `annotations` folder now
 
 
 
 
 In the end your directory structure should look like the following
 
-    ├── annotations/
-    │   └── 000000.txt
+  
     ├── images/
-    │   └── 000000.png
-    ├── .gitignore
-    ├── classes.json
+    │    └── train/
+    │         └── yyy.png
+    │     └── val/
+    │         └── zzz.png
+    ├── labels/
+    │     └── train/
+    │         └── yyy.txt
+    │     └── val/
+    │         └── zzz.txt
+    ├── config.yaml
+    ├── convert.py
     ├── main.ipynb
     └── README.md
 
@@ -47,8 +55,8 @@ More info/reference here: https://www.kaggle.com/datasets/shreydan/kitti-dataset
 
 
 **Data structure:** 
-Each png-file in data_object_image_2/training/image_2 has a corresponding YOLO format txt file in kitti-dataset-yolo-format/labels
-(000000.png <-> 000000.txt)
+Each png-file in images has a corresponding YOLO format txt file in labels
+(images/train/000000.png for labels/train/000000.txt)
 
 
 **Classes for objects:**
@@ -61,5 +69,3 @@ Each png-file in data_object_image_2/training/image_2 has a corresponding YOLO f
  'Misc': 5,\
  'Tram': 6,\
  'Person_sitting': 7
-
-
