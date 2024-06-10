@@ -21,21 +21,17 @@ In the end your directory structure should look like the following
 
   
     ├── images/
-    │   └── test/
-    │         └── xxx.txt
     │    └── train/
-    │         └── yyy.txt
-    │     └── val/
-    │         └── zzz.txt
-    ├── labels/
-    │     └── test/
-    │         └── xxx.png
-    │     └── train/
     │         └── yyy.png
     │     └── val/
     │         └── zzz.png
-    ├── .gitignore
-    ├── classes.json
+    ├── labels/
+    │     └── train/
+    │         └── yyy.txt
+    │     └── val/
+    │         └── zzz.txt
+    ├── config.yaml
+    ├── convert.py
     ├── main.ipynb
     └── README.md
 
@@ -59,7 +55,7 @@ More info/reference here: https://www.kaggle.com/datasets/shreydan/kitti-dataset
 
 **Data structure:** 
 Each png-file in images has a corresponding YOLO format txt file in labels
-(images/test/000000.png for labels/test/000000.txt)
+(images/train/000000.png for labels/train/000000.txt)
 
 
 **Classes for objects:**
@@ -72,5 +68,3 @@ Each png-file in images has a corresponding YOLO format txt file in labels
  'Misc': 5,\
  'Tram': 6,\
  'Person_sitting': 7
-
-

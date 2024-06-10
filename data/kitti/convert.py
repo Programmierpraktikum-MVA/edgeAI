@@ -11,7 +11,7 @@ dest_dir_train = 'train'
 dest_dir_val = 'val'
 dest_dir_test = 'test'
 
-def randomly_assign_files(train_ratio=0.7, val_ratio = 0.15, test_ratio = 0.15):
+def randomly_assign_files(train_ratio=0.8):
     image_files = [f for f in os.listdir(src_dir_img) if f.endswith('.png')]
     annotation_files = [f for f in os.listdir(src_dir_anno) if f.endswith('.txt')]
     image_files.sort()
@@ -20,27 +20,27 @@ def randomly_assign_files(train_ratio=0.7, val_ratio = 0.15, test_ratio = 0.15):
     #create new subfolders for images
     os.makedirs(src_dir_img + '/' + dest_dir_train, exist_ok=True)
     os.makedirs(src_dir_img + '/' + dest_dir_val, exist_ok=True)
-    os.makedirs(src_dir_img + '/' + dest_dir_test, exist_ok=True)
 
-    #new subfolders for annotations
-    os.makedirs(src_dir_anno + '/' + dest_dir_train, exist_ok=True)
-    os.makedirs(src_dir_anno + '/' + dest_dir_val, exist_ok=True)
-    os.makedirs(src_dir_anno + '/' + dest_dir_test, exist_ok=True)
+
+    #new subfolders for labels
+    os.makedirs(dest_dir_anno, exist_ok=True)
+    os.makedirs(dest_dir_anno + '/' + dest_dir_train, exist_ok=True)
+    os.makedirs(dest_dir_anno + '/' + dest_dir_val, exist_ok=True)
+
 
     for image_file, annotation_file in zip(image_files, annotation_files):
         rand_num = random.random()
         if rand_num < train_ratio: #70% train
             dest_dir = dest_dir_train
-        elif rand_num < train_ratio + val_ratio: #15% val
-            dest_dir = dest_dir_val
         else: #15% test
-            dest_dir = dest_dir_test
+            dest_dir = dest_dir_val
 
         img_start_path = src_dir_img + '/' + image_file
         img_end_path = src_dir_img + '/' + dest_dir + '/' + image_file
         anno_start_path = src_dir_anno + '/' + annotation_file
         anno_end_path = dest_dir_anno + '/' + dest_dir + '/' + annotation_file
-        
+        print(f"Moving image from {img_start_path} to {img_end_path}")
+        print(f"Moving annotation from {anno_start_path} to {anno_end_path}")
         
         #move pictures and annotations
         shutil.move(img_start_path, img_end_path)
