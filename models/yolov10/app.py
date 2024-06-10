@@ -12,7 +12,11 @@ from ultralytics import YOLOv10
 
 app = Flask(__name__)
 model = YOLOv10(args.model_path, task="detect")
-cap = cv2.VideoCapture(args.video_path)
+
+if args.video_path.isdigit():
+    cap = cv2.VideoCapture(int(args.video_path))
+else:
+    cap = cv2.VideoCapture(args.video_path)
 
 
 def generate_frames():

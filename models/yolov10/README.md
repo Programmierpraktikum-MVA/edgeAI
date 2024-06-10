@@ -29,7 +29,7 @@ You can also specify the number of epochs to train for by passing it as an argum
 default is 1).
 
 ```sh
-python3 train.py -e 3 ../../data/deepdrive/config.yaml
+python3 train.py --epochs 3 ../../data/deepdrive/config.yaml
 ```
 
 **Important note:** When running the script for the first time, ultralytics will complain about a missing dataset path.
@@ -57,6 +57,7 @@ python3 app.py runs/detect/train/weights/best.pt person-bicycle-car-detection.mp
 ```
 
 If you want to use your **webcam** as input, simply pass `0` as video source.
+In the Test.py is a short test to see if your webcam is recognized
 
 ```sh
 python3 app.py runs/detect/train/weights/best.pt 0
