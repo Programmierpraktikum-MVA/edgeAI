@@ -9,10 +9,11 @@ Kitti object detection dataset with 2d bounding boxes
 1. Download the "data_object_image2" subdirectory from the 'kitti dataset' https://www.kaggle.com/datasets/klemenko/kitti-dataset?select=data_object_image_2 
 !The download should only be 11+Gb, we do not need to download the entire dataset (24GB)
 2. Download 'kitti-yolo-labels' from https://www.kaggle.com/datasets/shreydan/kitti-dataset-yolo-format 
-3. Extract the folders "data_object_image2/training/image_2" and "kitti-yolo-labels/labels" into this directiory
-4. Rename the folder "data_object_image2/training/image_2" to "images" 
-5. Rename the "kitti-yolo-labels/labels" folder to "annotations"
+3. Extract the folders `data_object_image2/training/image_2` and `kitti-yolo-labels/labels` into this directiory
+4. Rename the folder `data_object_image2/training/image_2` to `images`
+5. Rename the `kitti-yolo-labels/labels` folder to `annotations`
 6. Run convert.py to generate the train/val/test split (70%/15%/15%)
+7. Feel free to delete the empty `annotations` folder now
 
 
 
