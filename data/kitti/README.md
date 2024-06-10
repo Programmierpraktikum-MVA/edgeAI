@@ -12,17 +12,28 @@ Kitti object detection dataset with 2d bounding boxes
 3. Extract the folders "data_object_image2/training/image_2" and "kitti-yolo-labels/labels" into this directiory
 4. Rename the folder "data_object_image2/training/image_2" to "images" 
 5. Rename the "kitti-yolo-labels/labels" folder to "annotations"
-6. 
+6. Run convert.py to generate the train/val/test split (70%/15%/15%)
 
 
 
 
 In the end your directory structure should look like the following
 
-    ├── annotations/
-    │   └── 000000.txt
+  
     ├── images/
-    │   └── 000000.png
+    │   └── test/
+    │         └── xxx.txt
+    │    └── train/
+    │         └── yyy.txt
+    │     └── val/
+    │         └── zzz.txt
+    ├── labels/
+    │     └── test/
+    │         └── xxx.png
+    │     └── train/
+    │         └── yyy.png
+    │     └── val/
+    │         └── zzz.png
     ├── .gitignore
     ├── classes.json
     ├── main.ipynb
@@ -47,8 +58,8 @@ More info/reference here: https://www.kaggle.com/datasets/shreydan/kitti-dataset
 
 
 **Data structure:** 
-Each png-file in data_object_image_2/training/image_2 has a corresponding YOLO format txt file in kitti-dataset-yolo-format/labels
-(000000.png <-> 000000.txt)
+Each png-file in images has a corresponding YOLO format txt file in kitti-dataset-yolo-format/labels
+(images/test/000000.png <-> annotations/labels/000000.txt)
 
 
 **Classes for objects:**

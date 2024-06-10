@@ -1,15 +1,12 @@
 import os
 import shutil
 import random
-import xml.etree.ElementTree as ET
-
-
-
-
 
 
 src_dir_img = 'images'
 src_dir_anno = 'annotations'
+
+dest_dir_anno = 'labels'
 dest_dir_train = 'train'
 dest_dir_val = 'val'
 dest_dir_test = 'test'
@@ -42,7 +39,7 @@ def randomly_assign_files(train_ratio=0.7, val_ratio = 0.15, test_ratio = 0.15):
         img_start_path = src_dir_img + '/' + image_file
         img_end_path = src_dir_img + '/' + dest_dir + '/' + image_file
         anno_start_path = src_dir_anno + '/' + annotation_file
-        anno_end_path = src_dir_anno + '/' + dest_dir + '/' + annotation_file
+        anno_end_path = dest_dir_anno + '/' + dest_dir + '/' + annotation_file
         
         
         #move pictures and annotations
