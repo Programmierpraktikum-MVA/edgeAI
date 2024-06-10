@@ -1,6 +1,4 @@
 import argparse
-import os
-import sys
 
 # Initialize parser for reading the command line
 parser = argparse.ArgumentParser(description='Start the Flask app with a YOLO model and video input.')
