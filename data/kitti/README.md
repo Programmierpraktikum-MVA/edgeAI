@@ -59,7 +59,7 @@ More info/reference here: https://www.kaggle.com/datasets/shreydan/kitti-dataset
 
 **Data structure:** 
 Each png-file in images has a corresponding YOLO format txt file in kitti-dataset-yolo-format/labels
-(images/test/000000.png <-> annotations/labels/000000.txt)
+(images/test/000000.png <-> labels/test/000000.txt)
 
 
 **Classes for objects:**
