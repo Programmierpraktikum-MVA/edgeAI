@@ -46,6 +46,9 @@ To verify that everything is set up correctly, run a test script:
 1. **Run the script:** Execute the script by running the following command in your terminal:
 
     ```bash
+    cd help
+    ```
+    ```bash
     python test.py
     ```
 
