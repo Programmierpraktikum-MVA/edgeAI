@@ -12,8 +12,8 @@ After extracting, the directory structure NEEDS to look like this, before we can
     .
     ├── annotations
         ├── anno_train.mat
-        ├── anno_val.mat
-    ├── leftImg8bit
+        └── anno_val.mat
+    ├── images
         ├── test
         ├── train
         ├── val

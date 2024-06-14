@@ -143,6 +143,11 @@ cython_debug/
 # VSCode
 .vscode/
 
+# datasets
+annotations/
+images/
+labels/
+
 # ultralytics
 runs/
 labels.cache
