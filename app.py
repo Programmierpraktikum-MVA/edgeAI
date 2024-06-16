@@ -1,6 +1,5 @@
 import argparse
 
-# Initialize parser for reading the command line
 parser = argparse.ArgumentParser(description='Start the Flask app with a YOLO model and video input.')
 parser.add_argument('model_path', type=str, help='Path to the YOLO model file')
 parser.add_argument('video_path', type=str, help='Path to the video file')
@@ -20,10 +19,6 @@ else:
 
 
 def generate_frames():
-    """
-    This function reads frames from the video, processes them with the YOLO model
-    and generates the annotated frames for the video output.
-    """
     while cap.isOpened():
         success, frame = cap.read()
 

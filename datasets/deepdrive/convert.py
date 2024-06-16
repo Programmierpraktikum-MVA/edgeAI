@@ -13,32 +13,25 @@ class_dict = {
     "bicycle": 11,
     "traffic light": 12,
     "traffic sign": 13,
-
 }
 
 image_width = 1280
 image_height = 720
 
 
-def process_dataset(label_type):
-    json_file = f"annotations/det_20/det_{label_type}.json"
-    output_path = f"labels/{label_type}"
-
-    with open(json_file) as f:
+def convert_to_yolo(data_type):
+    with open(f"annotations/det_{data_type}.json") as f:
         data = json.load(f)
-    print(f"Converting {len(data)} {label_type} labels to YOLO format in {output_path}")
 
-    if not os.path.exists(output_path):
-        os.makedirs(output_path)
+    os.makedirs(f"labels/{data_type}", exist_ok=True)
 
-    for item in tqdm(data):
-        filename = os.path.splitext(item["name"])[0] + ".txt"
-        output_file = os.path.join(output_path, filename)
-
+    for item in tqdm(data, desc=f"Generating labels for {data_type} annotations"):
         if "labels" not in item:
             continue
 
-        with open(output_file, "w") as f:
+        
+        txt_file = f"labels/{data_type}/{item['name'].replace('.jpg', '.txt')}"
+        with open(txt_file, "w") as f:
             for obj in item["labels"]:
                 category = obj["category"]
                 if category not in class_dict:
@@ -60,5 +53,5 @@ def process_dataset(label_type):
 
 
 if __name__ == "__main__":
-    process_dataset("train")
-    process_dataset("val")
+    convert_to_yolo("train")
+    convert_to_yolo("val")

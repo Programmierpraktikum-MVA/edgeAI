@@ -147,6 +147,7 @@ cython_debug/
 annotations/
 images/
 labels/
+tmp/
 
 # ultralytics
 runs/

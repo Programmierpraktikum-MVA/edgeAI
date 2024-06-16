@@ -1,7 +1,8 @@
 # Roadsign Dataset
 
-Download the 'archive.zip' file from https://www.kaggle.com/datasets/andrewmvd/road-sign-detection and extract the folder into this directiory.
-Afterward the directory structure should look like this
+Download the 'archive.zip' file from https://www.kaggle.com/datasets/andrewmvd/road-sign-detection and extract the folder into this directiory. 
+
+Make sure you have this directory structure:
     
 ```
 roadsigns
@@ -11,11 +12,12 @@ roadsigns
 │   └── road0.png
 ├── config.yaml
 ├── convert.py
-├── main.ipynb
 └── README.md
 ```
 
-## Annotations
+Now run the `convert.py` script to create the correct directory structure and YOLO labels in order to train with ultralytics.
+
+## Annotation info
 
 More info/reference here: https://www.kaggle.com/datasets/andrewmvd/road-sign-detections
 
@@ -47,37 +49,7 @@ Example road0.xml
 
 **4 classes for objects:**
 
-1. Traffic Light (name = trafficlight)
-2. Stop (name = stop)
-3. Speedlimit (name = speedlimit)
-4. Crosswalk (name = crosswalk)
-
-## Convert to Yolo-Format
-
-Run convert.py , the Structure before using convert.py should be equal to the one mentioned in Roadsigns Dataset , it will shuffle the images and annotations into train and val folders, and afterwards create label files
-in yolo format.
-
-The Structure in the End should look like
-
-```
-roadsigns
-├── annotations/
-│   ├── train
-│   │   └── roadX.xml
-│   └── val
-│       └── roadY.xml
-├── images/
-│   ├── train
-│   │   └── roadX.png
-│   └── val
-│       └── roadY.png
-├── labels/
-│   ├── train
-│   │   └── roadX.txt
-│   └── val
-│       └── roadY.txt
-├── config.yaml
-├── convert.py
-├── main.ipynb
-└── README.md
-```
+- trafficlight
+- stop
+- speedlimit
+- crosswalk

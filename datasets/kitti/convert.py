@@ -1,40 +1,28 @@
 import os
 import shutil
-import random
-import tqdm
-
-
-src_dir_img = "images"
-src_dir_anno = "annotations"
-
-dest_dir_anno = "labels"
-dest_dir_train = "train"
-dest_dir_val = "val"
-dest_dir_test = "test"
 
 
 def main(train_ratio=0.8):
-    image_files = [f for f in os.listdir(src_dir_img) if f.endswith(".png")]
-    annotation_files = [f for f in os.listdir(src_dir_anno) if f.endswith(".txt")]
-    image_files.sort()
-    annotation_files.sort()
+    images = os.listdir("images")
+    split_index = int(len(images) * train_ratio)
 
-    os.makedirs(src_dir_img + "/" + dest_dir_train, exist_ok=True)
-    os.makedirs(src_dir_img + "/" + dest_dir_val, exist_ok=True)
+    train_images = images[:split_index]
+    val_images = images[split_index:]
 
-    os.makedirs(dest_dir_anno + "/" + dest_dir_train, exist_ok=True)
-    os.makedirs(dest_dir_anno + "/" + dest_dir_val, exist_ok=True)
+    os.makedirs("images/train", exist_ok=True)
+    os.makedirs("images/val", exist_ok=True)
+    os.makedirs("labels/train", exist_ok=True)
+    os.makedirs("labels/val", exist_ok=True)
 
-    for image_file, annotation_file in tqdm(zip(image_files, annotation_files)):
-        dest_dir = dest_dir_train if random.random() < train_ratio else dest_dir_val
+    for image in train_images:
+        shutil.move(f"images/{image}", f"images/train/{image}")
+        label = image.replace(".png", ".txt")
+        shutil.move(f"labels/{label}", f"labels/train/{label}")
 
-        img_start_path = src_dir_img + "/" + image_file
-        img_end_path = src_dir_img + "/" + dest_dir + "/" + image_file
-        anno_start_path = src_dir_anno + "/" + annotation_file
-        anno_end_path = dest_dir_anno + "/" + dest_dir + "/" + annotation_file
-
-        shutil.move(img_start_path, img_end_path)
-        shutil.move(anno_start_path, anno_end_path)
+    for image in val_images:
+        shutil.move(f"images/{image}", f"images/val/{image}")
+        label = image.replace(".png", ".txt")
+        shutil.move(f"labels/{label}", f"labels/val/{label}")
 
 
 if __name__ == "__main__":

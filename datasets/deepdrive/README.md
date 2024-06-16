@@ -2,21 +2,22 @@
 
 On Linux systems, you can use the `download.sh` script to download the dataset and labels and set up the directory structure as required. You can also manually download the `bdd100k_det_20_labels_trainval.zip`, `100k_images_test.zip`, `100k_images_train.zip` and `100k_images_val.zip` files from https://dl.cv.ethz.ch/bdd100k/data/ and extract the images to this directory. Make sure your directory structure looks like this after extracting:
 
-    .
-    ├── annotations
-        └── det_20
-            ├── det_train.json
-            └── det_val.json
-    ├── images
-        ├── test
-        ├── train
-        └── val
-    ├── convert.py
-    ├── download.sh
-    ├── main.ipynb
-    └── README.md
+```
+deepdrive
+├── annotations
+│   ├── det_train.json
+│   └── det_val.json
+├── images
+│   ├── test
+│   ├── train
+│   └── val
+├── config.yaml
+├── convert.py
+├── download.sh
+└── README.md
+```
 
-Then run the `convert.py` script to convert the json annotations into the YOLO format.
+You can now run the `convert.py` script to create the correct directory structure and YOLO labels in order to train with ultralytics.
 
 ## Size
 
