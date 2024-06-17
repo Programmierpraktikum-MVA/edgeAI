@@ -1,3 +1,4 @@
+import json
 import os
 import cv2
 import scipy.io
@@ -5,9 +6,10 @@ import shutil
 from tqdm import tqdm
 
 class_dict = {
-    1: 1,
-    2: 3,
-    3: 7,
+    1: "person",
+    2: "rider",
+    3: "personsitting",
+    4: "person",
 }
 
 
@@ -21,7 +23,7 @@ def move_images(data_type):
         os.rmdir(subdir_path)
 
 
-def convert_to_yolo(data_type):
+def convert_to_yolo(data_type, classes):
     data = scipy.io.loadmat(f"annotations/anno_{data_type}.mat")
     annotations = data[f"anno_{data_type}_aligned"][0]
     im_names = [item["im_name"][0][0][0] for item in annotations]
@@ -37,20 +39,23 @@ def convert_to_yolo(data_type):
         txt_file = f"labels/{data_type}/{im_name.replace('.png', '.txt')}"
         with open(txt_file, "w") as f:
             for bbox in bboxes[idx]:
-                class_id, x1, y1, w, h = bbox[:5]
-                if class_id not in class_dict:
+                citypersons_id, x1, y1, w, h = bbox[:5]
+                if citypersons_id not in class_dict:
                     continue
 
+                class_name = class_dict[citypersons_id]
+                class_id = classes[class_name]
                 x_center = (x1 + w / 2) / im_width
                 y_center = (y1 + h / 2) / im_height
                 box_width = w / im_width
                 box_height = h / im_height
-                class_id = class_dict[class_id]
                 f.write(f"{class_id} {x_center} {y_center} {box_width} {box_height}\n")
 
 
 if __name__ == "__main__":
+    with open("../unified1.json") as f:
+        classes = json.load(f)
     for data_type in ["train", "val"]:
         move_images(data_type)
-        convert_to_yolo(data_type)
+        convert_to_yolo(data_type, classes)
     move_images("test")

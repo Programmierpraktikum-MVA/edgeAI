@@ -1,5 +1,6 @@
 import argparse
 import os
+from collections import defaultdict
 
 def main(dataset):
     num_train = len(os.listdir(f"{dataset}/images/train"))
@@ -7,12 +8,15 @@ def main(dataset):
     print("Train images:", num_train)
     print("Val images:", num_val)
 
-    labels = set()
+    label_counts = defaultdict(int)
     for txt_file in os.listdir(f"{dataset}/labels/train"):
         with open(f"{dataset}/labels/train/{txt_file}", 'r') as file:
             for line in file:
-                labels.add(line.split()[0])
-    print("Labels:", sorted(list(labels)))
+                label = line.split()[0]
+                label_counts[label] += 1
+
+    for label, count in sorted(label_counts.items()):
+        print(f"{label}: {count}")
 
     size = 0
     for dirpath, _, filenames in os.walk(f"{dataset}/images"):

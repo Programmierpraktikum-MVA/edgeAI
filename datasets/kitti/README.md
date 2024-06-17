@@ -7,10 +7,10 @@ Make sure you have this directory structure.
 
 ```
 kitti
+├── annotations/
+│   └── 000000.txt
 ├── images/
 │   └── 000000.png
-├── labels/
-│   └── 000000.txt
 ├── config.yaml
 ├── convert.py
 └── README.md

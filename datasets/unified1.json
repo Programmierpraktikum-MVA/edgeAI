@@ -1,0 +1,18 @@
+{
+    "car": 0,
+    "person": 1,
+    "personsitting": 1,
+    "van": 2,
+    "rider": 3,
+    "truck": 4,
+    "tram": 5,
+    "bus": 6,
+    "train": 7,
+    "motorcycle": 8,
+    "bicycle": 9,
+    "trafficlight": 10,
+    "trafficsign": 11,
+    "stop": 11,
+    "speedlimit": 11,
+    "crosswalk": 11
+}

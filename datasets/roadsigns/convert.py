@@ -1,32 +1,41 @@
+import json
 import os
 import shutil
-import random
 import xml.etree.ElementTree as ET
 
 class_dict = {
-    "trafficlight": 12,
-    "stop": 14,
-    "speedlimit": 15,
-    "crosswalk": 16,
+    "trafficlight": "trafficlight",
+    "stop": "stop",
+    "speedlimit": "speedlimit",
+    "crosswalk": "crosswalk",
 }
+
+with open("../classes.json") as f:
+    classes = json.load(f)
 
 
 def main(train_ratio=0.8):
-    images = sorted([f for f in os.listdir("images") if f.endswith(".png")])
-    annotations = sorted([f for f in os.listdir("annotations") if f.endswith(".xml")])
+    images = os.listdir("images")
+    split_index = int(len(images) * train_ratio)
+
+    train_images = images[:split_index]
+    val_images = images[split_index:]
 
     os.makedirs("images/train", exist_ok=True)
     os.makedirs("images/val", exist_ok=True)
     os.makedirs("labels/train", exist_ok=True)
     os.makedirs("labels/val", exist_ok=True)
 
-    for image, annotation in zip(images, annotations):
-        dest_dir = "train" if random.random() < train_ratio else "val"
-        shutil.move(f"images/{image}", f"images/{dest_dir}/{image}")
-        convert_xml_to_yolo(annotation, dest_dir)
+    for image in train_images:
+        shutil.move(f"images/{image}", f"images/train/{image}")
+        convert_to_yolo(image.replace(".png", ".xml"), "train")
+
+    for image in val_images:
+        shutil.move(f"images/{image}", f"images/val/{image}")
+        convert_to_yolo(image.replace(".png", ".xml"), "val")
 
 
-def convert_xml_to_yolo(xml_file, dest_dir):
+def convert_to_yolo(xml_file, dest_dir):
     tree = ET.parse(f"annotations/{xml_file}")
     root = tree.getroot()
 
@@ -39,7 +48,8 @@ def convert_xml_to_yolo(xml_file, dest_dir):
     with open(txt_file, "w") as f:
         for obj in root.findall("object"):
             label = obj.find("name").text
-            class_id = class_dict[label]
+            class_name = class_dict[label]
+            class_id = classes[class_name]
 
             box = obj.find("bndbox")
             x1 = int(box.find("xmin").text) / img_width

@@ -3,20 +3,23 @@ import os
 from tqdm import tqdm
 
 class_dict = {
-    "car": 0,
-    "pedestrian": 1,
-    "rider": 3,
-    "truck": 4,
-    "bus": 8,
-    "train": 9,
-    "motorcycle": 10,
-    "bicycle": 11,
-    "traffic light": 12,
-    "traffic sign": 13,
+    "car": "car",
+    "pedestrian": "person",
+    "rider": "rider",
+    "truck": "truck",
+    "bus": "bus",
+    "train": "train",
+    "motorcycle": "motorcycle",
+    "bicycle": "bicycle",
+    "traffic light": "trafficlight",
+    "traffic sign": "trafficsign",
 }
 
 image_width = 1280
 image_height = 720
+
+with open("../classes.json") as f:
+    classes = json.load(f)
 
 
 def convert_to_yolo(data_type):
@@ -43,7 +46,8 @@ def convert_to_yolo(data_type):
                 x2 = box2d["x2"] / image_width
                 y2 = box2d["y2"] / image_height
 
-                class_id = class_dict[category]
+                class_name = class_dict[category]
+                class_id = classes[class_name]
                 x_center = (x1 + x2) / 2
                 y_center = (y1 + y2) / 2
                 width = x2 - x1
