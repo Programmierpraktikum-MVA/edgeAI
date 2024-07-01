@@ -4,7 +4,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 
-# example jpg: images/train/0a0a0b1a-7c39d841.jpg
+# example jpg: dataset/images/train/0a0a0b1a-7c39d841.jpg
 path = sys.argv[1]
 
 
@@ -14,11 +14,11 @@ def drawtxt(path, split_path):
     dataset = split_path[0]
     
 # determine path of label
-    txtpath_prefix = f"labels/{split_path[-2]}" if dataset in ["deepdrive", "citypersons"] else "annotations"
+    txtpath_prefix = f"labels/{split_path[-2]}" #if dataset in ["deepdrive", "citypersons"] else "annotations"
     _, descriptionfile = os.path.split(path)
     descriptionfile = descriptionfile[:-4] + ".txt"
     txtpath = os.path.join(dataset + f"/{txtpath_prefix}" +  f"/{descriptionfile}")
-    print(txtpath)
+    print("open this label: "  + txtpath)
     with open(txtpath) as f:
         for line in f:
             label, x_center, y_center, width, height = line.split(" ")
@@ -38,7 +38,12 @@ def drawtxt(path, split_path):
     cv2.waitKey(0)
 
 
-def drawxml(path, dataset):
+    # Obsolete since we don't access the labels of roadsigns with xml anymore. 
+    # If in future a dataset is added with xml-labels for whatever reason you could use drawxml() to check if the box is correctly drawn. 
+    # Since drawxml() was taylormade for the roadsigns dataset it needs some refactoring to work on other datasets with xml-labeling. 
+    # As said obsolete if you keep use yolo.
+
+""" def drawxml(path, dataset):
     image = cv2.imread(path)
     img_height, img_width, _  = image.shape
     _, descriptionfile = os.path.split(path)
@@ -63,9 +68,8 @@ def drawxml(path, dataset):
         cv2.rectangle(image, (xmin,ymin), (xmax, ymax), (0,255,0),1)
         cv2.putText(image, bbox_label, (xmin, ymin - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,255,0), 1)
     cv2.imshow(f"{path}", image)
-    cv2.waitKey(0)
+    cv2.waitKey(0) """
     
-
 
 
 if __name__ == "__main__":
@@ -74,14 +78,19 @@ if __name__ == "__main__":
         f = open(path)
     except FileNotFoundError:
         print("Couldn't find the path. Please make sure that your terminal is in the data directory and all the datasets are structured like specified in their respective README.md.")
+        print("Make sure that the path you entered is structured like this: example_dataset\images\val_or_train\example_image.")
         sys.exit(1)
     f.close()
 
     split_path = os.path.normpath(path).split(os.sep)
     dataset = split_path[0]
     
-    if dataset in ["deepdrive", "kitti", "citypersons"]:
+    #  The if-statement is obsolete since all datasets should be in yolo-format e.g. like in the deepdrive-dataset. 
+    if dataset in ["deepdrive", "kitti", "citypersons", "roadsigns"]:
         drawtxt(path, split_path)
-    elif dataset == "roadsigns":
-        drawxml(path, split_path)
+
+
+
+    #elif dataset == "roadsigns":
+    #    drawxml(path, split_path)
     
