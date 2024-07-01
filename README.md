@@ -1,53 +1,51 @@
 # Computer vision on edge devices
 
-## Setting Up the Project on Windows
+If you are on **Windows**, make sure you've set up your system as specified [here](docs/WINDOWS.md)
 
-If you are a Windows user and want to try out our project, follow the steps outlined to ensure it
-runs smoothly without errors.
+## Set up
 
-**YouTube Tutorial:** Watch this
-helpful [YouTube video](https://www.youtube.com/watch?v=r7Am-ZGMef8&ab_channel=SL7Tech) which provides a detailed
-guide.
+Before getting started, we recommend you delete any [Ultralytics](https://docs.ultralytics.com/) configuration file that may already be on your system.
 
-**Text Guide:** Another helpful source
-in [Text](https://medium.com/analytics-vidhya/installing-cuda-and-cudnn-on-windows-d44b8e9876b5) form.
+**Linux:**
 
+```sh
+rm -rf ~/.config/Ultralytics/
+```
 
-## 1. Download Required Software
+**Windows:**
 
-Before getting started, ensure you have the necessary software installed:
+Haven't testes this but the config is probably somehwere in `$env:USERPROFILE\AppData`.
 
-- **PyTorch:** Visit the [PyTorch website](https://pytorch.org/get-started/locally/) to get the correct version number
-  of CUDA and a pip install command.
+## Training
 
-- **Visual Studio:** Download the latest version of Visual Studio
-  from [here](https://visualstudio.microsoft.com/de/vs/older-downloads/).
+We've provided four datasets that you can use out of the box to train a model. Just make sure you follow the steps in the respective README files and converted the annotations into YOLO format using the respective `convert.py` script. If so, you can simply start a training run on one dataset like this:
 
-- **CUDA Toolkit:** Choose the CUDA version compatible with PyTorch from the NVIDIA
-  website's [CUDA Toolkit Archive](https://developer.nvidia.com/cuda-toolkit-archive).
+```sh
+python3 train.py datasets/roadsigns/config.yaml
+```
 
-- **cuDNN:** Select the appropriate cuDNN version corresponding to your chosen CUDA version from
-  the [cuDNN Archive](https://developer.nvidia.com/rdp/cudnn-archive).
+You can also specify the number of epochs to train for by passing it as an argument to the `--epochs` or `-e` flag (default is 1).
 
-## 2. Installation
+```sh
+python3 train.py -e 3 datasets/roadsigns/config.yaml
+```
 
-Follow the installation instructions provided with each software package to complete the setup process.
+## Export
 
-- **Extracting cuDNN Files:** Extract the cuDNN zip file. You'll need to move some files from the cuDNN directory to
-  specific subfolders within the CUDA directory. This process is explained in detail in the YouTube video mentioned
-  above, starting from minute 08:40. Refer to the video for a step-by-step walkthrough.
-- **execute the command from the PyTorch website:** It should look something like this:
-    ```bash
-    pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-  ```
+For better inference performance on edge devices, you will want to export your model to [ncnn](https://github.com/Tencent/ncnn) format. We recommend using the [Ultraltics CLI](https://docs.ultralytics.com/usage/cli/) for that.
 
-To verify that everything is set up correctly, run a test script:
+```sh
+yolo export model=runs/detect/train/weights/best.pt format=ncnn
+```
 
-1. **Run the script:** Execute the script by running the following command in your terminal:
+**Important note:** When exporting to ncnn for the first time, Ultralytics will download the ncnn dependency. This takes a very long time (about 15mins average).
 
-    ```bash
-    python test.py
-    ```
+## Inference
 
-   If you see the name of your NVIDIA GPU printed, it means the installation was successful. If CUDA is not available,
-   please check your installation steps.
+The `app.py` script sets up a simple flask server that streams images to a port. Provide a path to the model you want to use and the video source, usually a video file. The example video used here can be downloaded from [here](https://tubcloud.tu-berlin.de/s/GPLWJp8EpEoEt43)
+
+```sh
+python3 app.py runs/detect/train/weights/best.pt mittel_1.mp4
+```
+
+If you want to use your **webcam** as input, simply pass `0` as video source.
