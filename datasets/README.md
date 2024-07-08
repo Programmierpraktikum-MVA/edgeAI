@@ -1,30 +1,29 @@
-# Dataset Information
+# Datasets
 
----
+| Dataset     | Train | Val   | Size  |
+| ----------- | ----- | ----- | ----- |
+| citypersons | 2975  | 500   | 11.6G |
+| deepdrive   | 70000 | 20000 | 542M  |
+| kitti       | 5984  | 1497  | 6.2G  |
+| roadsigns   | 693   | 184   | 228M  |
 
-## Labels Used
+**Labels**
 
-Unified Kitti/Deepdrive labels:
+We have the following distinct labels.
 
-0. Car
-1. Pedestrian
-2. Van
-3. Cyclist/rider
-4. Truck
-5. misc (pretty sure it isn't used anywhere but just in case)
-6. Tram
-7. Person sitting
-8. bus
-9. train
-10. motorcycle
-11. bicycle
-12. traffic light
-13. traffic sign
-14. stop sign
-15. speedlimit sign
-16. crosswalk
----
-
-
-
-
+- car
+- person
+- van
+- rider
+- truck
+- tram
+- personsitting
+- bus
+- train
+- motorcycle
+- bicycle
+- trafficlight
+- trafficsign
+- stopsign
+- speedlimitsign
+- crosswalk
