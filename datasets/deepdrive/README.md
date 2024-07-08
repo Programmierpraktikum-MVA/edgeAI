@@ -37,11 +37,11 @@ The keys can be easily looked up in the json file. For each cell, the important 
 
 **Some remarks:**
 
-- Some items don't have labels for some reasen, thus the try-except block.
+- Some items don't have labels, thus the try-except block.
 - In the demo we don't use the whole float number, we convert that to an int. 
-- The categories `trailer`, `other vehicle` and `other person` are not officially listed [here](https://wandb.ai/av-datasets/av-dataset/reports/The-Berkeley-Deep-Drive-BDD110K-Dataset--VmlldzoyNjI0MDk5#road-object-detection). You can use `show_img_for_category()` to get some idea for what these classes are used.
+- The categories `trailer`, `other vehicle` and `other person` are not officially listed [here](https://wandb.ai/av-datasets/av-dataset/reports/The-Berkeley-Deep-Drive-BDD110K-Dataset--VmlldzoyNjI0MDk5#road-object-detection). You can use `show_img_for_category()` to get some idea how these classes are used.
 
-Notice: to close the image in the notebook, press any key.
+Note: to close the image in the notebook, press any key.
 
 ## Links
 
