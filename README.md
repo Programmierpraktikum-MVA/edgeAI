@@ -1,6 +1,6 @@
 # Computer vision on edge devices
 
-- [TUBCloud Link](https://tubcloud.tu-berlin.de/s/jPT5SxQHcMNBxoW) for presentation slides and sample videos
+- [TUBCloud Link](https://tubcloud.tu-berlin.de/s/jPT5SxQHcMNBxoW) for finetuned model weights, presentation slides and sample videos
 - [Documentation](./docs/)
 
 ## Set up
