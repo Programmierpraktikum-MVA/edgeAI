@@ -148,6 +148,7 @@ annotations/
 images/
 labels/
 tmp/
+saved_models/
 
 # ultralytics
 runs/
