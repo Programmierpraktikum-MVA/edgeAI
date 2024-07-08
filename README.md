@@ -1,6 +1,6 @@
 # Computer vision on edge devices
 
-If you are on **Windows**, make sure you've set up your system as specified [here](docs/WINDOWS.md)
+If you are on **Windows**, make sure you've set up your system as specified [here](docs/WINDOWS.md).
 
 ## Set up
 
@@ -14,11 +14,11 @@ rm -rf ~/.config/Ultralytics/
 
 **Windows:**
 
-Haven't testes this but the config is probably somehwere in `$env:USERPROFILE\AppData`.
+In most cases, the config can be found somewhere in `$env:USERPROFILE\AppData`.
 
 ## Training
 
-We've provided four datasets that you can use out of the box to train a model. Just make sure you follow the steps in the respective README files and converted the annotations into YOLO format using the respective `convert.py` script. If so, you can simply start a training run on one dataset like this:
+We've provided four datasets that you can use out of the box to train a model. Just make sure you follow the steps in the respective README files and convert the annotations into the YOLO format using the respective `convert.py` script. If so, you can simply start a training run on one dataset like this:
 
 ```sh
 python3 train.py datasets/roadsigns/config.yaml
@@ -38,7 +38,7 @@ For better inference performance on edge devices, you will want to export your m
 yolo export model=runs/detect/train/weights/best.pt format=ncnn
 ```
 
-**Important note:** When exporting to ncnn for the first time, Ultralytics will download the ncnn dependency. This takes a very long time (about 15mins average).
+**Important note:** When exporting to ncnn for the first time, Ultralytics will download the ncnn dependency. This takes a very long time (about 15 minutes average).
 
 ## Inference
 
@@ -48,4 +48,4 @@ The `app.py` script sets up a simple flask server that streams images to a port.
 python3 app.py runs/detect/train/weights/best.pt mittel_1.mp4
 ```
 
-If you want to use your **webcam** as input, simply pass `0` as video source.
+If you want to use your **webcam** as input, simply pass `0` as a video source.

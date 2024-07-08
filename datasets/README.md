@@ -9,7 +9,7 @@
 
 **Labels**
 
-We have the following distinct labels.
+These datasets contain the following distinct labels:
 
 - car
 - person

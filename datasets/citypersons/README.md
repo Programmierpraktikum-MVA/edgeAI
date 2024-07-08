@@ -25,11 +25,11 @@ After extracting, the directory structure NEEDS to look like this, before we can
 Now follow the following steps to restructure the folder and create yolo labels for the images
 
 1. Run `setup.py` to move all images into a centralized `images ` folder, without subdirectories for each city the
-   labels are also created
+   labels are also created.
 
 Feel free to delete the `annotations` and (empty )`leftImg8bit` folder
 
-If all went well the new folder structure should look like this
+The resulting structure after running `setup.py` should look like this:
 
     .
     ├── images

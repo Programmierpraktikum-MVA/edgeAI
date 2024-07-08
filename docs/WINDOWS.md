@@ -11,7 +11,7 @@ guide.
 in [Text](https://medium.com/analytics-vidhya/installing-cuda-and-cudnn-on-windows-d44b8e9876b5) form.
 
 
-## 1. Download Required Software
+## 1. Download the required Software
 
 Before getting started, ensure you have the necessary software installed:
 
@@ -34,7 +34,7 @@ Follow the installation instructions provided with each software package to comp
 - **Extracting cuDNN Files:** Extract the cuDNN zip file. You'll need to move some files from the cuDNN directory to
   specific subfolders within the CUDA directory. This process is explained in detail in the YouTube video mentioned
   above, starting from minute 08:40. Refer to the video for a step-by-step walkthrough.
-- **execute the command from the PyTorch website:** It should look something like this:
+- **Execute the command from the PyTorch website:** It should look something like this:
     ```bash
     pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
   ```
