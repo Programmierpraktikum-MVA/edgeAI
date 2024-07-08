@@ -1,8 +1,11 @@
 # Computer vision on edge devices
 
-If you are on **Windows**, make sure you've set up your system as specified [here](docs/WINDOWS.md).
+- [TUBCloud Link](https://tubcloud.tu-berlin.de/s/jPT5SxQHcMNBxoW) for presentation slides and sample videos
+- [Documentation](./docs/)
 
 ## Set up
+
+If you are on **Windows**, make sure you've set up your system as specified [here](docs/WINDOWS.md).
 
 Before getting started, we recommend you delete any [Ultralytics](https://docs.ultralytics.com/) configuration file that may already be on your system.
 
