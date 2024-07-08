@@ -62,13 +62,13 @@ Using the `federated.py` script we trained these models.
 
 | Checkpoint     | map50 |
 | -------------- | ----- |
-| After 1 round  | 0.39  |
-| After 2 rounds | 0.52  | 
-| After 3 rounds | 0.74  |
+| After 1 round  | tbd   |
+| After 2 rounds | tbd   | 
+| After 3 rounds | tbd   |
 
 **2 rounds, 3 epochs**
 
 | Checkpoint     | map50 |
 | -------------- | ----- |
-| After 1 round  | 0.39  |
-| After 2 rounds | 0.52  |
+| After 1 round  | tbd   |
+| After 2 rounds | tbd   |
