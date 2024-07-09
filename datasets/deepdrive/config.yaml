@@ -4,20 +4,15 @@ val: images/val
 test:  images/test
 
 names:
-  0: Car
-  1: Pedestrian
-  2: Van
-  3: Rider
-  4: Truck
-  5: misc
-  6: Tram
-  7: Person sitting
-  8: bus
-  9: train
-  10: motorcycle
-  11: bicycle
-  12: traffic light
-  13: traffic sign
-  14: stop sign
-  15: speedlimit sign
-  16: crosswalk
+  0: car
+  1: person
+  2: van
+  3: rider
+  4: truck
+  5: tram
+  6: bus
+  7: train
+  8: motorcycle
+  9: bicycle
+  10: traffic light
+  11: street sign

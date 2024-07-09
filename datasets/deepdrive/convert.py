@@ -7,31 +7,27 @@ class_dict = {
     "pedestrian": 1,
     "rider": 3,
     "truck": 4,
-    "bus": 8,
-    "train": 9,
-    "motorcycle": 10,
-    "bicycle": 11,
-    "traffic light": 12,
-    "traffic sign": 13,
-
+    "bus": 6,
+    "train": 7,
+    "motorcycle": 8,
+    "bicycle": 9,
+    "traffic light": 10,
+    "traffic sign": 11,
 }
 
 image_width = 1280
 image_height = 720
 
 
-def process_dataset(label_type):
-    json_file = f"annotations/det_20/det_{label_type}.json"
-    output_path = f"labels/{label_type}"
+def convert(split):
+    output_path = f"labels/{split}"
 
-    with open(json_file) as f:
+    with open(f"annotations/det_{split}.json") as f:
         data = json.load(f)
-    print(f"Converting {len(data)} {label_type} labels to YOLO format in {output_path}")
 
-    if not os.path.exists(output_path):
-        os.makedirs(output_path)
+    os.makedirs(output_path, exist_ok=True)
 
-    for item in tqdm(data):
+    for item in tqdm(data, desc=f"Generating labels for {split} annotations"):
         filename = os.path.splitext(item["name"])[0] + ".txt"
         output_file = os.path.join(output_path, filename)
 
@@ -60,5 +56,5 @@ def process_dataset(label_type):
 
 
 if __name__ == "__main__":
-    process_dataset("train")
-    process_dataset("val")
+    convert("train")
+    convert("val")

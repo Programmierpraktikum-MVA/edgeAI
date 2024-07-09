@@ -1,55 +1,50 @@
 import os
-import shutil
-import random
+import sys
+
+current_dir = os.path.dirname(__file__)
+sys.path.append(os.path.join(current_dir, "..", ".."))
+
+from utils.dataset_utils import split_data
+
+anno_dir = os.path.join(current_dir, "annotations")
+imgs_dir = os.path.join(current_dir, "images")
+lbls_dir = os.path.join(current_dir, "labels")
+
+class_dict = {
+    0: 0,  # car
+    1: 1,  # person
+    2: 2,  # van
+    3: 3,  # cyclist
+    4: 4,  # truck
+    6: 5,  # tram
+    7: 1,  # person
+}
 
 
-src_dir_img = 'images'
-src_dir_anno = 'annotations'
+def convert():
+    if not os.path.isdir(anno_dir):
+        print("Make sure you rename the labels directory to annotations")
+        return
 
-dest_dir_anno = 'labels'
-dest_dir_train = 'train'
-dest_dir_val = 'val'
-dest_dir_test = 'test'
+    split_data(imgs_dir)
+    split_data(anno_dir)
 
-def randomly_assign_files(train_ratio=0.8):
-    image_files = [f for f in os.listdir(src_dir_img) if f.endswith('.png')]
-    annotation_files = [f for f in os.listdir(src_dir_anno) if f.endswith('.txt')]
-    image_files.sort()
-    annotation_files.sort()
-    
-    #create new subfolders for images
-    os.makedirs(src_dir_img + '/' + dest_dir_train, exist_ok=True)
-    os.makedirs(src_dir_img + '/' + dest_dir_val, exist_ok=True)
+    for split in ["train", "val"]:
+        src_dir = os.path.join(anno_dir, split)
+        dst_dir = os.path.join(lbls_dir, split)
+        os.makedirs(dst_dir, exist_ok=True)
 
-
-    #new subfolders for labels
-    os.makedirs(dest_dir_anno, exist_ok=True)
-    os.makedirs(dest_dir_anno + '/' + dest_dir_train, exist_ok=True)
-    os.makedirs(dest_dir_anno + '/' + dest_dir_val, exist_ok=True)
-
-
-    for image_file, annotation_file in zip(image_files, annotation_files):
-        rand_num = random.random()
-        if rand_num < train_ratio: #70% train
-            dest_dir = dest_dir_train
-        else: #15% test
-            dest_dir = dest_dir_val
-
-        img_start_path = src_dir_img + '/' + image_file
-        img_end_path = src_dir_img + '/' + dest_dir + '/' + image_file
-        anno_start_path = src_dir_anno + '/' + annotation_file
-        anno_end_path = dest_dir_anno + '/' + dest_dir + '/' + annotation_file
-        print(f"Moving image from {img_start_path} to {img_end_path}")
-        print(f"Moving annotation from {anno_start_path} to {anno_end_path}")
-        
-        #move pictures and annotations
-        shutil.move(img_start_path, img_end_path)
-        shutil.move(anno_start_path, anno_end_path)
-
-
-
-
+        for file in os.listdir(src_dir):
+            with open(os.path.join(src_dir, file), "r") as f:
+                lines = f.readlines()
+            with open(os.path.join(dst_dir, file), "w") as f:
+                for line in lines:
+                    parts = line.split()
+                    kitti_id = int(parts[0])
+                    if kitti_id not in class_dict:
+                        continue
+                    f.write(f"{class_dict[kitti_id]} " + " ".join(parts[1:]) + "\n")
 
 
 if __name__ == "__main__":
-    randomly_assign_files() #split the images into 70% train 15% val 15% test
+    convert()
