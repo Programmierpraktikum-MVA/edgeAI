@@ -1,43 +1,49 @@
 import argparse
 
-parser = argparse.ArgumentParser(description='Start the Flask app with a YOLO model and video input.')
-parser.add_argument('model_path', type=str, help='Path to the YOLO model file')
-parser.add_argument('video_path', type=str, help='Path to the video file')
+parser = argparse.ArgumentParser()
+parser.add_argument("model_path", type=str, help="Path to the YOLO model file")
 args = parser.parse_args()
 
-import cv2
-from flask import Flask, Response
+import os
+import gradio as gr
 from ultralytics import YOLO
 
-app = Flask(__name__)
-model = YOLO(args.model_path, task="detect")
-
-if args.video_path.isdigit():
-    cap = cv2.VideoCapture(int(args.video_path))
-else:
-    cap = cv2.VideoCapture(args.video_path)
+model = YOLO(args.model_path)
 
 
-def generate_frames():
-    while cap.isOpened():
-        success, frame = cap.read()
+def predict_video(video, conf_threshold, iou_threshold):
+    results = model(
+        source=video,
+        stream=True,
+        conf=conf_threshold,
+        iou=iou_threshold,
+        show_labels=True,
+        show_conf=True,
+        imgsz=640,
+    )
 
-        if not success:
-            break
+    for result in results:
+        result.save(filename="result.jpg")
+        yield "result.jpg"
 
-        results = model(frame)
-        annotated_frame = results[0].plot()
-
-        _, buffer = cv2.imencode('.jpg', annotated_frame)
-        frame_bytes = buffer.tobytes()
-
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
-
-
-@app.route('/')
-def video_feed():
-    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return results
 
 
-app.run(host='0.0.0.0', port=5000)
+iface = gr.Interface(
+    fn=predict_video,
+    inputs=[
+        gr.Video(interactive=True, label="Upload Video"),
+        gr.Slider(minimum=0, maximum=1, value=0.25, label="Confidence threshold"),
+        gr.Slider(minimum=0, maximum=1, value=0.45, label="IoU threshold"),
+    ],
+    outputs=gr.Image(type="pil", label="Result"),
+    title="Computer Vision on Edge Devices",
+    examples=(
+        [[os.path.join("videos", file), 0.25, 0.45] for file in os.listdir("videos")]
+        if os.path.isdir("videos")
+        else []
+    ),
+)
+
+if __name__ == "__main__":
+    iface.launch()
