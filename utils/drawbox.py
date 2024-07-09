@@ -25,87 +25,50 @@ class_dict = {
 
 datasets = ["deepdrive", "kitti", "roadsigns", "citypersons"]
 
-def main(image_path = None):
-    if image_path:
-        label_path = (image_path.replace("images", "labels").replace(".png", ".txt").replace(".jpg", ".txt"))
 
-        image = cv2.imread(image_path)
-
-        with open(label_path, "r") as file:
-            labels = file.readlines()
-
-        height, width, _ = image.shape
-
-        for label in labels:
-            parts = label.strip().split()
-            label = class_dict[int(parts[0])]
-            x_center = float(parts[1])
-            y_center = float(parts[2])
-            bbox_width = float(parts[3])
-            bbox_height = float(parts[4])
-
-            x_center_abs = int(x_center * width)
-            y_center_abs = int(y_center * height)
-            bbox_width_abs = int(bbox_width * width)
-            bbox_height_abs = int(bbox_height * height)
-
-            x1 = int(x_center_abs - bbox_width_abs / 2)
-            y1 = int(y_center_abs - bbox_height_abs / 2)
-            x2 = int(x_center_abs + bbox_width_abs / 2)
-            y2 = int(y_center_abs + bbox_height_abs / 2)
-
-            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
-            cv2.putText(image, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-
-        cv2.imshow("Image with Bounding Boxes", image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-    
-    else:
-
-        #if given no argument open a random image and draw the bounding boxes
+def main(image_path=None):
+    if not image_path:
         dataset = random.choice(datasets)
-        image_folder = random.choice(["val", "train"])
-        image_folder = fr"../datasets/{dataset}/images/{image_folder}"
-        image = random.choice(os.listdir(image_folder))
-        image_path = fr"{image_folder}/{image}"
-        label_path = (image_path.replace("images", "labels").replace(".png", ".txt").replace(".jpg", ".txt"))
-        
-        image = cv2.imread(image_path)
-        
-        with open(label_path, "r") as file:
-            labels = file.readlines()
+        split = random.choice(["val", "train"])
+        img_dir = f"../datasets/{dataset}/images/{split}"
+        image_path = f"{img_dir}/{random.choice(os.listdir(img_dir))}"
 
-        height, width, _ = image.shape
+    label_path = (image_path.replace("images", "labels").replace(".png", ".txt").replace(".jpg", ".txt"))
+    image = cv2.imread(image_path)
 
-        for label in labels:
-            parts = label.strip().split()
-            label = class_dict[int(parts[0])]
-            x_center = float(parts[1])
-            y_center = float(parts[2])
-            bbox_width = float(parts[3])
-            bbox_height = float(parts[4])
+    with open(label_path, "r") as file:
+        labels = file.readlines()
 
-            x_center_abs = int(x_center * width)
-            y_center_abs = int(y_center * height)
-            bbox_width_abs = int(bbox_width * width)
-            bbox_height_abs = int(bbox_height * height)
+    height, width, _ = image.shape
 
-            x1 = int(x_center_abs - bbox_width_abs / 2)
-            y1 = int(y_center_abs - bbox_height_abs / 2)
-            x2 = int(x_center_abs + bbox_width_abs / 2)
-            y2 = int(y_center_abs + bbox_height_abs / 2)
+    for label in labels:
+        parts = label.strip().split()
+        label = class_dict[int(parts[0])]
+        x_center = float(parts[1])
+        y_center = float(parts[2])
+        bbox_width = float(parts[3])
+        bbox_height = float(parts[4])
 
-            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
-            cv2.putText(image, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+        x_center_abs = int(x_center * width)
+        y_center_abs = int(y_center * height)
+        bbox_width_abs = int(bbox_width * width)
+        bbox_height_abs = int(bbox_height * height)
 
-        cv2.imshow("Image with Bounding Boxes", image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        x1 = int(x_center_abs - bbox_width_abs / 2)
+        y1 = int(y_center_abs - bbox_height_abs / 2)
+        x2 = int(x_center_abs + bbox_width_abs / 2)
+        y2 = int(y_center_abs + bbox_height_abs / 2)
+
+        cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
+        cv2.putText(image, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+
+    cv2.imshow(image_path, image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Display images with bounding boxes and labels")
-    parser.add_argument("image_path", type=str, nargs= "?", help="Path to the image file")
+    parser.add_argument("image_path", type=str, nargs="?", help="Path to the image file")
     args = parser.parse_args()
     main(args.image_path)
