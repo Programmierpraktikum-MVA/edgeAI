@@ -1,5 +1,7 @@
 import argparse
 import cv2
+import os
+import random
 
 class_dict = {
     0: "Car",
@@ -21,10 +23,17 @@ class_dict = {
     16: "Crosswalk",
 }
 
+datasets = ["deepdrive", "kitti", "roadsigns", "citypersons"]
 
-def main(image_path):
+
+def main(image_path=None):
+    if not image_path:
+        dataset = random.choice(datasets)
+        split = random.choice(["val", "train"])
+        img_dir = f"../datasets/{dataset}/images/{split}"
+        image_path = f"{img_dir}/{random.choice(os.listdir(img_dir))}"
+
     label_path = (image_path.replace("images", "labels").replace(".png", ".txt").replace(".jpg", ".txt"))
-
     image = cv2.imread(image_path)
 
     with open(label_path, "r") as file:
@@ -53,13 +62,13 @@ def main(image_path):
         cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
         cv2.putText(image, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
 
-    cv2.imshow("Image with Bounding Boxes", image)
+    cv2.imshow(image_path, image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Display images with bounding boxes and labels")
-    parser.add_argument("image_path", type=str, help="Path to the image file")
+    parser.add_argument("image_path", type=str, nargs="?", help="Path to the image file")
     args = parser.parse_args()
     main(args.image_path)
