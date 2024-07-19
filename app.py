@@ -1,16 +1,16 @@
 import argparse
 
-# parser = argparse.ArgumentParser()
-# parser.add_argument("model_path", type=str, help="Path to the YOLO model file")
-# args = parser.parse_args()
+parser = argparse.ArgumentParser()
+parser.add_argument("model_path", type=str, help="Path to the YOLO model file")
+args = parser.parse_args()
 
+import PIL.Image as Image
 import os
 import socket
 import gradio as gr
 from ultralytics import YOLO
 
-#model = YOLO(args.model_path, task="detect")
-model = YOLO(model="yolov8n.pt", task="detect")
+model = YOLO(args.model_path, task="detect")
 port = 7860
 
 
