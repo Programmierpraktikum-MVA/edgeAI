@@ -1,0 +1,8 @@
+/setup
+/data/*.txt
+/data/*/*.txt
+/data/*.db
+/data/*shape.csv
+/data/*detections.csv
+/run/*.ipynb
+/*/*.sh
