@@ -1,0 +1,12 @@
+/setup/*/
+/setup/*.txt
+/setup/initPi.sh
+/setup/pi.md
+/data/*.txt
+/data/*/*.txt
+/data/*.db
+/data/*shape.csv
+/data/*detections.csv
+#/run/*.ipynb
+#/*/*.sh
+#/setup/installPython.sh
